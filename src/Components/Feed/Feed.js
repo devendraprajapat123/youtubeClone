@@ -19,8 +19,10 @@ const Feed = ({ category }) => {
     const [loading, setLoading] = useState(false)
 
     const fetchdata = async () => {
-        const videoList_url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=100&videoCategoryId=${category}&key=${API_KEY}`
 
+              const videoList_url = ` https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=200&regionCode=IN&videoCategoryId=${category}&key=${API_KEY}`
+
+        //https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=100&videoCategoryId=${category}&key=${API_KEY}
         await fetch(videoList_url).then(response => response.json()).then(data => setData(data.items))
         setLoading(true)
     }
@@ -46,7 +48,7 @@ const Feed = ({ category }) => {
                                 <p>{value_converter(item.statistics.viewCount)} view &bull; {moment(item.snippet.publishedAt).fromNow()}</p>
                             </Link>
                         )
-                    }) : <Spin  tip="Loading Please Check Internet Connection" size="large"> </Spin>
+                    }) : <Spin tip="Loading Please Check Internet Connection" size="large"> </Spin>
             }
 
 
