@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./Components/Navbar";
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from "./Pages/HomePage/Home";
+import Video from "./Pages/Video/Video";
+import { useState } from "react";
+
+
 
 function App() {
+  const [sidebar,setSidebar] = useState(true)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Navbar setSidebar={setSidebar} />
+        <Routes>
+          <Route path="/" element={<Home sidebar={sidebar}/>}></Route>
+          <Route path="/video/:categoryId/:videoId" element={<Video />}></Route>
+
+        </Routes>
+
+      </BrowserRouter>
+
     </div>
   );
 }
